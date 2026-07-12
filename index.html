@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultorio & Laboratorio Dental Nueva Imagen | Pachuca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ══ TOKENS ══ */
+:root {
+  --blue:     #1A50D0;   /* royal blue vivo */
+  --blue-lt:  #3B6FF0;
+  --blue-dk:  #1238A8;
+  --blue-bg:  #EEF3FF;   /* fondo secciones claras */
+  --blue-mid: #D6E2FF;
+  --white:    #FFFFFF;
+  --text:     #0D1B3E;
+  --text2:    #4A5C80;
+  --border:   #C8D8F0;
+  --surface:  #FFFFFF;
+  --pink:     #F472B6;
+}
+
+/* ══ RESET ══ */
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter', system-ui, sans-serif;
+  background:var(--white);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a { color:inherit; text-decoration:none; }
+img { display:block; max-width:100%; }
+h1,h2,h3,.display { font-family:'Outfit',system-ui,sans-serif; }
+
+/* ══ ANIMATIONS ══ */
+@keyframes fadeInUp    { from{opacity:0;transform:translate3d(0,44px,0);}  to{opacity:1;transform:none;} }
+@keyframes fadeInDown  { from{opacity:0;transform:translate3d(0,-30px,0);} to{opacity:1;transform:none;} }
+@keyframes fadeInLeft  { from{opacity:0;transform:translate3d(-44px,0,0);} to{opacity:1;transform:none;} }
+@keyframes fadeInRight { from{opacity:0;transform:translate3d(44px,0,0);}  to{opacity:1;transform:none;} }
+@keyframes fadeIn      { from{opacity:0;} to{opacity:1;} }
+@keyframes zoomIn      { from{opacity:0;transform:scale(.88);} to{opacity:1;transform:scale(1);} }
+@keyframes float       { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+@keyframes scrollPulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+.ani {
+  opacity:0;
+  animation-duration:.75s;
+  animation-timing-function:cubic-bezier(.22,1,.36,1);
+  animation-fill-mode:both;
+  animation-play-state:paused;
+}
+.ani.go { animation-play-state:running; }
+
+/* ══ NAV — blanco para diferenciarse del hero azul ══ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.7rem 2.5rem;
+  background:#fff;
+  border-bottom:1px solid #E0E8F8;
+  box-shadow:0 2px 16px rgba(26,80,208,.08);
+  transition:padding .3s;
+}
+nav.scrolled { padding:.45rem 2.5rem; }
+
+.nav-logo { display:flex; align-items:center; gap:.7rem; }
+.nav-logo img { height:46px; width:auto; }
+.nav-brand { display:flex; flex-direction:column; line-height:1.2; }
+.nav-brand-name {
+  font-family:'Outfit',sans-serif; font-weight:800;
+  font-size:1.05rem; color:var(--blue); letter-spacing:-.01em;
+}
+.nav-brand-sub { font-size:.6rem; color:var(--text2); font-weight:500; letter-spacing:.02em; }
+
+.nav-links { display:flex; gap:2rem; list-style:none; }
+.nav-links a {
+  color:var(--text2); font-family:'Outfit',sans-serif;
+  font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700;
+  position:relative; transition:color .2s;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-3px; left:0; right:100%;
+  height:2px; background:var(--blue); transition:right .3s;
+}
+.nav-links a:hover { color:var(--blue); }
+.nav-links a:hover::after { right:0; }
+
+/* ══ HERO — ancho completo, fondo azul con blobs ══ */
+.hero {
+  position:relative; min-height:100vh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:9rem 2.5rem 6rem;
+  overflow:hidden;
+  background:var(--blue);
+}
+/* Círculos / blobs decorativos */
+.hero-blob {
+  position:absolute; border-radius:50%; pointer-events:none;
+}
+.blob-1 {
+  width:700px; height:700px;
+  background:radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 65%);
+  top:-20%; right:-15%;
+  animation:float 18s ease-in-out infinite;
+}
+.blob-2 {
+  width:500px; height:500px;
+  background:radial-gradient(circle, rgba(255,255,255,.06) 0%, transparent 65%);
+  bottom:-15%; left:-10%;
+  animation:float 22s ease-in-out infinite reverse;
+}
+.blob-3 {
+  width:350px; height:350px;
+  background:radial-gradient(circle, rgba(59,111,240,.5) 0%, transparent 65%);
+  top:30%; right:25%;
+  animation:float 14s ease-in-out infinite 3s;
+}
+/* Rejilla de puntos sutil */
+.hero-dots {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
+  background-size:30px 30px;
+}
+/* hero grid: texto izq + visual der */
+.hero-inner {
+  position:relative; z-index:1;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:3rem; align-items:center;
+  max-width:1200px;
+}
+.hero-content { max-width:520px; }
+
+/* Foto card flotante */
+.hero-visual { position:relative; }
+.hero-photo-card {
+  border-radius:20px; overflow:hidden;
+  box-shadow:0 32px 72px rgba(0,0,0,.35);
+  transform:rotate(2deg);
+  transition:transform .4s ease;
+  border:4px solid rgba(255,255,255,.2);
+}
+.hero-photo-card:hover { transform:rotate(0deg) scale(1.01); }
+.hero-photo-card img {
+  width:100%; aspect-ratio:4/5;
+  object-fit:cover; object-position:center 20%;
+  display:block;
+}
+
+/* Badges flotantes sobre la foto */
+.hero-badge {
+  position:absolute;
+  background:#fff; border-radius:14px;
+  padding:.85rem 1.2rem;
+  box-shadow:0 8px 28px rgba(0,0,0,.22);
+  display:flex; align-items:center; gap:.75rem;
+  animation:float 4s ease-in-out infinite;
+}
+.hero-badge-1 { top:-1.5rem; left:-2rem; animation-delay:0s; }
+.hero-badge-2 { bottom:2rem; right:-2rem; animation-delay:1.5s; }
+.badge-ico { font-size:1.6rem; line-height:1; }
+.badge-num {
+  font-family:'Outfit',sans-serif; font-size:1.4rem;
+  font-weight:900; color:var(--blue); line-height:1;
+}
+.badge-lbl { font-size:.68rem; color:var(--text2); font-weight:500; margin-top:.1rem; }
+
+/* ── Hero cards (lado derecho) ── */
+.hero-cards { display:flex; flex-direction:column; gap:1rem; }
+
+.hcard {
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:18px;
+  backdrop-filter:blur(12px);
+  padding:1.4rem 1.6rem;
+  color:#fff;
+}
+.hcard-main { display:flex; align-items:flex-start; gap:1.1rem; }
+.hcard-icon {
+  width:54px; height:54px; flex-shrink:0;
+}
+.hcard-icon svg { width:100%; height:100%; }
+.hcard-label {
+  font-size:.65rem; letter-spacing:.18em; text-transform:uppercase;
+  font-weight:600; opacity:.65; margin-bottom:.3rem;
+}
+.hcard-title {
+  font-family:'Outfit',sans-serif; font-size:1.15rem;
+  font-weight:800; line-height:1.2; margin-bottom:.4rem;
+}
+.hcard-desc { font-size:.82rem; opacity:.75; line-height:1.4; }
+
+.hcard-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.hcard-sm { display:flex; align-items:center; gap:.85rem; padding:1rem 1.2rem; }
+.hcard-sm-icon {
+  width:40px; height:40px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.hcard-sm-val {
+  font-family:'Outfit',sans-serif; font-weight:800;
+  font-size:1rem; line-height:1;
+}
+.hcard-sm-lbl { font-size:.7rem; opacity:.65; margin-top:.2rem; }
+
+.hcard-stat {
+  display:flex; align-items:center; justify-content:space-around;
+  padding:1.2rem 1.6rem;
+}
+.hcard-stat-item { text-align:center; }
+.hcard-stat-num {
+  font-family:'Outfit',sans-serif; font-weight:900;
+  font-size:1.6rem; line-height:1; color:#fff;
+}
+.hcard-stat-lbl { font-size:.65rem; opacity:.65; margin-top:.3rem; line-height:1.3; }
+.hcard-stat-div { width:1px; height:40px; background:rgba(255,255,255,.2); }
+
+.hero-eyebrow {
+  font-family:'Outfit',sans-serif;
+  font-size:.72rem; letter-spacing:.28em; text-transform:uppercase;
+  color:rgba(255,255,255,.65); margin-bottom:1.25rem; font-weight:600;
+  display:flex; align-items:center; gap:1rem;
+  animation:fadeInDown .6s .1s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-eyebrow::before { content:''; width:2.5rem; height:1px; background:rgba(255,255,255,.5); }
+
+.hero-title {
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(3rem,6.5vw,5.5rem);
+  font-weight:900; line-height:1.0; color:#fff; letter-spacing:-.03em;
+  margin-bottom:1.5rem; text-wrap:balance;
+  animation:fadeInUp .8s .25s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-title em { font-style:normal; color:#93C5FD; }
+
+.hero-line {
+  width:5rem; height:3px;
+  background:linear-gradient(90deg,rgba(255,255,255,.7),transparent);
+  margin-bottom:1.5rem;
+  animation:fadeInLeft .6s .5s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-sub {
+  font-size:1.1rem; color:rgba(255,255,255,.75); max-width:480px; line-height:1.8;
+  margin-bottom:2.5rem;
+  animation:fadeInUp .7s .6s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-btns {
+  display:flex; gap:1rem; flex-wrap:wrap;
+  animation:fadeInUp .7s .8s cubic-bezier(.22,1,.36,1) both;
+}
+.btn {
+  display:inline-flex; align-items:center; gap:.55rem;
+  padding:.85rem 2rem;
+  font-family:'Outfit',sans-serif; font-size:.82rem;
+  letter-spacing:.06em; text-transform:uppercase; font-weight:700;
+  border-radius:50px; border:none; cursor:pointer; transition:all .25s;
+}
+.btn-white { background:#fff; color:var(--blue); }
+.btn-white:hover { background:var(--blue-bg); transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.25); }
+.btn-outline-white { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.45); }
+.btn-outline-white:hover { border-color:#fff; background:rgba(255,255,255,.1); transform:translateY(-2px); }
+.btn-blue { background:var(--blue); color:#fff; }
+.btn-blue:hover { background:var(--blue-lt); transform:translateY(-2px); }
+.btn-outline-blue { background:transparent; color:var(--blue); border:2px solid var(--blue); border-radius:50px; }
+.btn-outline-blue:hover { background:var(--blue-bg); transform:translateY(-2px); }
+
+.hero-scroll {
+  position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:.5rem;
+  color:rgba(255,255,255,.25); font-size:.6rem; letter-spacing:.22em; text-transform:uppercase;
+  animation:fadeIn 1s 1.4s both;
+}
+.scroll-line {
+  width:1px; height:48px;
+  background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent);
+  animation:scrollPulse 1.8s infinite ease-in-out;
+}
+
+/* ══ STATS STRIP ══ */
+.stats-strip { background:var(--blue-dk); }
+.stats-inner {
+  max-width:1100px; margin:0 auto; padding:1.75rem 2.5rem;
+  display:grid; grid-template-columns:repeat(4,1fr);
+}
+.stat-item { padding:.75rem 1.5rem; text-align:center; border-right:1px solid rgba(255,255,255,.1); }
+.stat-item:last-child { border-right:none; }
+.stat-num {
+  font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900;
+  color:#fff; line-height:1; margin-bottom:.25rem;
+}
+.stat-lbl { font-size:.67rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.4); }
+
+/* ══ SHARED ══ */
+.label {
+  font-family:'Outfit',sans-serif; font-size:.68rem; letter-spacing:.25em;
+  text-transform:uppercase; color:var(--blue); margin-bottom:.6rem; font-weight:700;
+}
+.label-white { color:rgba(255,255,255,.7); }
+.section-title {
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:900; line-height:1.1; text-wrap:balance;
+  letter-spacing:-.025em; color:var(--text); margin-bottom:1.25rem;
+}
+.section-title-white { color:#fff; }
+.sec-pad { padding:6rem 0; }
+.sec-inner { max-width:1100px; margin:0 auto; padding:0 2.5rem; }
+.sec-head  { max-width:1100px; margin:0 auto; padding:0 2.5rem 3rem; }
+
+/* ══ ABOUT ══ */
+.about-section { background:var(--blue-bg); }
+.about-grid {
+  max-width:1100px; margin:0 auto; padding:6rem 2.5rem;
+  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+}
+.about-img-wrap { position:relative; overflow:hidden; border-radius:12px; box-shadow:0 32px 72px rgba(26,80,208,.18); }
+.about-img { width:100%; aspect-ratio:4/5; object-fit:cover; transition:transform .6s; }
+.about-img-wrap:hover .about-img { transform:scale(1.04); }
+.about-badge {
+  position:absolute; bottom:-1rem; right:-1rem;
+  background:var(--blue); color:#fff; padding:1.25rem 1.5rem; border-radius:10px;
+  font-family:'Outfit',sans-serif; font-size:.9rem; line-height:1.4; font-weight:600;
+  box-shadow:0 12px 36px rgba(26,80,208,.4);
+}
+.about-badge strong { display:block; font-size:2.2rem; font-weight:900; }
+.about-quote {
+  font-family:'Outfit',sans-serif; font-size:1.25rem; font-weight:700; line-height:1.5;
+  color:var(--blue-dk); border-left:4px solid var(--blue); padding-left:1.25rem; margin-bottom:1.5rem;
+}
+.about-body { color:var(--text2); line-height:1.85; }
+.about-body p+p { margin-top:1rem; }
+
+/* ══ SERVICES ══ */
+.services-section { background:var(--white); }
+.services-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+.svc-card {
+  background:var(--white); border:1.5px solid var(--border);
+  border-radius:12px; padding:2.5rem;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+  position:relative; overflow:hidden;
+}
+.svc-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,var(--blue),var(--blue-lt));
+  transform:scaleX(0); transform-origin:left; transition:transform .35s;
+}
+.svc-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(26,80,208,.14); border-color:var(--blue-lt); }
+.svc-card:hover::before { transform:scaleX(1); }
+.card-head { display:flex; align-items:center; gap:1rem; margin-bottom:2rem; padding-bottom:1.5rem; border-bottom:1.5px solid var(--border); }
+.card-ico { width:3.2rem; height:3.2rem; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; background:var(--blue-bg); }
+.card-ttl { font-family:'Outfit',sans-serif; font-size:1.3rem; font-weight:800; color:var(--text); line-height:1.2; }
+.card-ttl small { display:block; font-family:'Inter',sans-serif; font-size:.67rem; letter-spacing:.15em; text-transform:uppercase; color:var(--text2); margin-top:.2rem; font-weight:400; }
+.svc-list { list-style:none; display:flex; flex-direction:column; }
+.svc-item {
+  display:flex; align-items:flex-start; gap:.75rem;
+  font-size:.92rem; color:var(--text2);
+  padding:.6rem 0; border-bottom:1px solid rgba(0,0,0,.05);
+  transition:color .2s,padding-left .2s;
+}
+.svc-item:last-child { border-bottom:none; }
+.svc-item:hover { color:var(--blue); padding-left:4px; }
+.svc-item::before { content:'→'; color:var(--blue); flex-shrink:0; font-size:.78rem; margin-top:.2em; font-weight:700; }
+.lab-item { font-family:'Courier New',monospace; font-size:.85rem; }
+.lab-item::before { content:'>'; }
+
+/* ══ GALLERY ══ */
+.gallery-section { background:var(--blue-dk); }
+.gallery-head {
+  max-width:1100px; margin:0 auto; padding:0 2.5rem 3rem;
+  display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:end;
+}
+.gallery-head-right { color:rgba(255,255,255,.6); font-size:.97rem; line-height:1.8; }
+.gallery-head-right p { margin-bottom:1.5rem; }
+.gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+.gal-item { position:relative; overflow:hidden; aspect-ratio:4/3; background:#0a1628; }
+.gal-item img { width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .55s cubic-bezier(.22,1,.36,1); }
+.gal-item:hover img { transform:scale(1.1); }
+.gal-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(18,56,168,.9) 0%,transparent 55%);
+  opacity:0; display:flex; align-items:flex-end; padding:1.25rem;
+  transition:opacity .3s;
+}
+.gal-item:hover .gal-overlay { opacity:1; }
+.gal-cap {
+  font-family:'Outfit',sans-serif; color:#fff; font-size:.78rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase;
+  transform:translateY(6px); transition:transform .3s;
+}
+.gal-item:hover .gal-cap { transform:translateY(0); }
+.gal-cta {
+  aspect-ratio:1/1; background:var(--blue);
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; padding:2rem; gap:1.25rem; transition:background .25s;
+  border:none; cursor:pointer;
+}
+.gal-cta:hover { background:var(--blue-lt); }
+.gal-cta-title { font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:900; color:#fff; line-height:1.15; letter-spacing:-.02em; }
+.gal-cta-btn {
+  display:inline-block; padding:.65rem 1.4rem; border-radius:50px;
+  border:2px solid rgba(255,255,255,.55); color:#fff;
+  font-family:'Outfit',sans-serif; font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  transition:all .2s;
+}
+.gal-cta:hover .gal-cta-btn { background:#fff; color:var(--blue); border-color:#fff; }
+
+/* ══ WHY ══ */
+.why-section { background:var(--blue-bg); border-top:1.5px solid var(--border); }
+.why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+.why-card {
+  background:#fff; border:1.5px solid var(--border); border-radius:12px; padding:2.5rem;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+  position:relative; overflow:hidden;
+}
+.why-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(26,80,208,.12); border-color:var(--blue); }
+.why-ico { font-size:2.5rem; margin-bottom:1.25rem; }
+.why-ttl { font-family:'Outfit',sans-serif; font-size:1.2rem; font-weight:800; color:var(--text); margin-bottom:.7rem; line-height:1.2; }
+.why-body { font-size:.88rem; color:var(--text2); line-height:1.8; }
+
+/* ══ MAP ══ */
+.map-section { background:var(--blue); }
+.map-inner {
+  max-width:1100px; margin:0 auto; padding:6rem 2.5rem;
+  display:grid; grid-template-columns:1fr 1.6fr; gap:4rem; align-items:center;
+}
+.map-address { color:rgba(255,255,255,.75); font-size:1rem; line-height:1.8; margin-bottom:2rem; }
+.map-address strong { color:#fff; font-weight:700; }
+.map-frame { border-radius:12px; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,.35); border:2px solid rgba(255,255,255,.15); }
+.map-frame iframe { display:block; width:100%; height:380px; border:none; }
+
+/* ══ CONTACT ══ */
+.contact-section { background:var(--blue-dk); }
+.contact-grid {
+  max-width:1100px; margin:0 auto; padding:6rem 2.5rem;
+  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;
+}
+.contact-title { font-family:'Outfit',sans-serif; font-size:clamp(2.2rem,4.5vw,3.8rem); font-weight:900; color:#fff; line-height:1.05; letter-spacing:-.03em; margin-bottom:1rem; }
+.contact-title em { font-style:normal; color:#93C5FD; }
+.contact-sub { color:rgba(255,255,255,.6); font-size:1rem; line-height:1.8; margin-bottom:2rem; }
+.contact-cards { display:flex; flex-direction:column; gap:.85rem; }
+.c-card {
+  background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.1);
+  padding:1.2rem 1.5rem; border-radius:10px;
+  display:flex; align-items:center; gap:1.2rem;
+  transition:background .25s,border-color .25s,transform .25s;
+}
+a.c-card:hover { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.3); transform:translateX(5px); }
+.c-ico { font-size:1.3rem; flex-shrink:0; }
+.c-lbl { font-family:'Outfit',sans-serif; font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:.2rem; font-weight:600; }
+.c-val { color:#fff; font-size:1rem; font-weight:500; }
+.social-row { display:flex; gap:.7rem; flex-wrap:wrap; }
+.soc-btn {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.55rem 1rem; border:1.5px solid rgba(255,255,255,.2); border-radius:50px;
+  color:rgba(255,255,255,.6); font-family:'Outfit',sans-serif; font-size:.75rem; font-weight:600; letter-spacing:.05em;
+  transition:all .2s;
+}
+.soc-btn:hover { border-color:#fff; color:#fff; background:rgba(255,255,255,.1); }
+
+/* ══ WHATSAPP FLOAT ══ */
+.wa-float {
+  position:fixed; bottom:2rem; right:2rem; z-index:999;
+  display:flex; align-items:center; gap:.75rem;
+  background:#25D366; color:#fff;
+  padding:.9rem 1.5rem; border-radius:50px;
+  font-family:'Outfit',sans-serif; font-size:.88rem; font-weight:700;
+  box-shadow:0 6px 28px rgba(37,211,102,.5);
+  transition:transform .25s,box-shadow .25s;
+  animation:zoomIn .6s 1.4s both;
+}
+.wa-float:hover { transform:translateY(-3px); box-shadow:0 10px 36px rgba(37,211,102,.65); color:#fff; }
+
+/* ══ FOOTER ══ */
+footer {
+  background:#0A1422; padding:2rem 2.5rem;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+}
+.footer-brand { display:flex; align-items:center; gap:.65rem; }
+.footer-brand-name { font-family:'Outfit',sans-serif; font-size:.9rem; font-weight:700; color:rgba(255,255,255,.4); }
+.footer-cr { font-family:'Outfit',sans-serif; font-size:.62rem; letter-spacing:.08em; color:rgba(255,255,255,.18); }
+
+/* ══ RESPONSIVE ══ */
+/* ── TABLET ── */
+@media(max-width:900px){
+  /* Hero */
+  .hero-inner { grid-template-columns:1fr; gap:2rem; }
+  .hero-visual { display:none; }
+  .hero-content { max-width:100%; }
+
+  /* Resto de secciones */
+  .stats-inner { grid-template-columns:repeat(2,1fr); }
+  .about-grid { grid-template-columns:1fr; gap:3rem; padding:4rem 1.5rem; }
+  .services-grid { grid-template-columns:1fr; }
+  .gallery-grid { grid-template-columns:repeat(2,1fr); }
+  .why-grid { grid-template-columns:1fr 1fr; }
+  .map-inner { grid-template-columns:1fr; gap:2.5rem; padding:4rem 1.5rem; }
+  .contact-grid { grid-template-columns:1fr; gap:3rem; padding:4rem 1.5rem; }
+  .sec-inner,.sec-head { padding:0 1.5rem; }
+  .sec-head { padding-bottom:2.5rem; }
+}
+
+/* ── MÓVIL ── */
+@media(max-width:600px){
+  /* Nav */
+  nav { padding:.7rem 1.1rem; }
+  .nav-links { display:none; }
+  .nav-logo img { height:38px; }
+
+  /* Hero */
+  .hero { min-height:100svh; padding:0 1.25rem; }
+  .hero-inner { padding-top:5.5rem; padding-bottom:3.5rem; }
+  .hero-eyebrow { font-size:.62rem; }
+  .hero-title { font-size:clamp(2.4rem,11vw,3.8rem); line-height:1.05; }
+  .hero-sub { font-size:.95rem; }
+  .hero-btns { flex-direction:column; gap:.75rem; }
+  .hero-btns .btn { width:100%; justify-content:center; text-align:center; }
+  .hero-line { margin:1.2rem 0; }
+
+  /* Stats */
+  .stats-inner { grid-template-columns:repeat(2,1fr); gap:1rem; padding:1.5rem 1.25rem; }
+  .stat-num { font-size:2rem; }
+
+  /* Secciones */
+  .sec-pad { padding:3.5rem 0; }
+  .sec-inner,.sec-head { padding:0 1.25rem; }
+  .sec-head { padding-bottom:2rem; }
+  .section-title { font-size:clamp(1.6rem,7vw,2.2rem); }
+
+  /* About */
+  .about-grid { padding:3.5rem 1.25rem; gap:2.5rem; }
+  .about-img { border-radius:16px; }
+
+  /* Servicios */
+  .services-grid { gap:1rem; padding:0 1.25rem; }
+  .service-card { padding:1.5rem; }
+
+  /* Galería */
+  .gallery-grid { grid-template-columns:1fr 1fr; gap:4px; border-radius:0; }
+  .gallery-head { flex-direction:column; gap:1rem; padding:0 1.25rem; }
+  .gallery-head-right { max-width:100%; }
+
+  /* Por qué */
+  .why-grid { grid-template-columns:1fr; gap:1rem; padding:0 1.25rem; }
+
+  /* Mapa */
+  .map-inner { padding:3.5rem 1.25rem; }
+  .map-frame iframe { height:240px; border-radius:12px; }
+  .map-info h3 { font-size:1.3rem; }
+
+  /* Contacto */
+  .contact-grid { padding:3.5rem 1.25rem; }
+
+  /* WhatsApp flotante */
+  .wa-float { bottom:1.25rem; right:1.25rem; padding:.9rem; border-radius:50%; }
+  .wa-float span { display:none; }
+
+  /* Footer */
+  footer { padding:2rem 1.25rem; }
+  .footer-inner { flex-direction:column; gap:1.5rem; text-align:center; }
+  .footer-links { flex-wrap:wrap; justify-content:center; gap:.75rem 1.25rem; }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .ani,.hero-eyebrow,.hero-title,.hero-sub,.hero-btns,.hero-stat{ animation:none!important; opacity:1!important; }
+}
+</style>
+</head>
+<body>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/527711887746?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="wa-float">
+  <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>Agendar por WhatsApp</span>
+</a>
+
+<!-- Nav -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20124131.png" alt="Dental Nueva Imagen">
+    <div class="nav-brand">
+      <span class="nav-brand-name">Nueva Imagen</span>
+      <span class="nav-brand-sub">Consultorio &amp; Laboratorio Dental</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Trabajos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- Hero — ancho completo con blobs -->
+<section class="hero" id="hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="hero-blob blob-3"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+
+    <!-- Texto izquierda -->
+    <div class="hero-content">
+      <div class="hero-eyebrow">Pachuca, Hidalgo · Consultorio &amp; Laboratorio</div>
+      <h1 class="hero-title">Vuelve a<br>sonreír con<br><em>nueva imagen</em></h1>
+      <div class="hero-line"></div>
+      <p class="hero-sub">Precisión desde el laboratorio,<br>confianza en el consultorio.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/527711887746?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="btn btn-white">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Agendar cita
+        </a>
+        <a href="#servicios" class="btn btn-outline-white">Ver servicios</a>
+      </div>
+    </div>
+
+    <!-- Visual derecha: tarjetas de servicios -->
+    <div class="hero-visual" style="animation:fadeInRight .9s .4s cubic-bezier(.22,1,.36,1) both; opacity:0;">
+      <div class="hero-cards">
+
+        <!-- Tarjeta grande -->
+        <div class="hcard hcard-main">
+          <div class="hcard-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,.15)"/>
+              <path d="M24 10c-3.5 0-6.5 1.4-8.5 3.8C13.5 16 13 18.3 13 20c0 3.4 1.6 6 3.2 8.5l.3.5C18 32 19.5 35 20 38h8c.5-3 2-6 3.5-9l.3-.5C33.4 26 35 23.4 35 20c0-1.7-.5-4-2.5-6.2C30.5 11.4 27.5 10 24 10z" fill="white" opacity=".9"/>
+              <path d="M20 38h8l-.5 2.5A1.5 1.5 0 0126 42h-4a1.5 1.5 0 01-1.5-1.5L20 38z" fill="white" opacity=".7"/>
+            </svg>
+          </div>
+          <div class="hcard-text">
+            <div class="hcard-label">Laboratorio &amp; Consultorio</div>
+            <div class="hcard-title">Todo en un solo lugar</div>
+            <div class="hcard-desc">Fabricamos y colocamos tus prótesis sin intermediarios</div>
+          </div>
+        </div>
+
+        <!-- Fila de tarjetas chicas -->
+        <div class="hcard-row">
+          <div class="hcard hcard-sm">
+            <div class="hcard-sm-icon" style="background:rgba(255,255,255,.15);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/></svg>
+            </div>
+            <div>
+              <div class="hcard-sm-val">Pachuca</div>
+              <div class="hcard-sm-lbl">Hidalgo, México</div>
+            </div>
+          </div>
+          <div class="hcard hcard-sm">
+            <div class="hcard-sm-icon" style="background:rgba(255,255,255,.15);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" fill="white"/></svg>
+            </div>
+            <div>
+              <div class="hcard-sm-val">Lun–Sáb</div>
+              <div class="hcard-sm-lbl">Atención personalizada</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta stat -->
+        <div class="hcard hcard-stat">
+          <div class="hcard-stat-item">
+            <div class="hcard-stat-num">+500</div>
+            <div class="hcard-stat-lbl">Pacientes<br>satisfechos</div>
+          </div>
+          <div class="hcard-stat-div"></div>
+          <div class="hcard-stat-item">
+            <div class="hcard-stat-num">10+</div>
+            <div class="hcard-stat-lbl">Años de<br>experiencia</div>
+          </div>
+          <div class="hcard-stat-div"></div>
+          <div class="hcard-stat-item">
+            <div class="hcard-stat-num">100%</div>
+            <div class="hcard-stat-lbl">Materiales<br>de calidad</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
+</section>
+
+<!-- Stats -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item ani" data-anim="fadeInUp" data-delay="0">
+      <div class="stat-num">2 en 1</div><div class="stat-lbl">Consultorio + Lab</div>
+    </div>
+    <div class="stat-item ani" data-anim="fadeInUp" data-delay="150">
+      <div class="stat-num">Lab</div><div class="stat-lbl">Propio & equipado</div>
+    </div>
+    <div class="stat-item ani" data-anim="fadeInUp" data-delay="300">
+      <div class="stat-num">$$</div><div class="stat-lbl">Precio accesible</div>
+    </div>
+    <div class="stat-item ani" data-anim="fadeInUp" data-delay="450">
+      <div class="stat-num">Pachuca</div><div class="stat-lbl">Hidalgo, México</div>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section id="nosotros" class="about-section sec-pad">
+  <div class="about-grid">
+    <div class="ani" data-anim="fadeInLeft" data-delay="0">
+      <div class="about-img-wrap">
+        <img class="about-img" src="imagenes/Captura%20de%20pantalla%202026-07-12%20123831.png" alt="Laboratorio dental">
+        <div class="about-badge"><strong>2 en 1</strong>Consultorio<br>+ Laboratorio</div>
+      </div>
+    </div>
+    <div>
+      <div class="label ani" data-anim="fadeInDown" data-delay="0">Quiénes somos</div>
+      <h2 class="section-title ani" data-anim="fadeInDown" data-delay="100">Un consultorio y un laboratorio bajo el mismo techo</h2>
+      <blockquote class="about-quote ani" data-anim="fadeInUp" data-delay="200">"Diseñamos y colocamos prótesis con mejor ajuste, estética y atención personalizada."</blockquote>
+      <div class="about-body ani" data-anim="fadeInUp" data-delay="320">
+        <p>En <strong>Dental Nueva Imagen</strong> combinamos la calidez del consultorio con la precisión técnica de nuestro laboratorio propio. Controlamos cada detalle: desde el diagnóstico hasta la fabricación y colocación de tus prótesis.</p>
+        <p>Tu salud es nuestra prioridad. Materiales de alta calidad, resultados duraderos y una sonrisa que te dé confianza.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="servicios" class="services-section sec-pad">
+  <div class="sec-head">
+    <div class="label ani" data-anim="fadeInDown" data-delay="0">Nuestros servicios</div>
+    <h2 class="section-title ani" data-anim="fadeInDown" data-delay="120">Atención integral: clínica y laboratorio</h2>
+  </div>
+  <div class="sec-inner">
+    <div class="services-grid">
+      <div class="svc-card ani" data-anim="fadeInUp" data-delay="0">
+        <div class="card-head">
+          <div class="card-ico">🦷</div>
+          <div class="card-ttl">Consultorio Dental<small>Atención clínica</small></div>
+        </div>
+        <ul class="svc-list">
+          <li class="svc-item">Consulta y diagnóstico dental</li>
+          <li class="svc-item">Limpieza y profilaxis</li>
+          <li class="svc-item">Extracciones dentales</li>
+          <li class="svc-item">Colocación de prótesis</li>
+          <li class="svc-item">Revisión y ajuste de restauraciones</li>
+          <li class="svc-item">Atención personalizada</li>
+        </ul>
+      </div>
+      <div class="svc-card ani" data-anim="fadeInUp" data-delay="200">
+        <div class="card-head">
+          <div class="card-ico">⚙️</div>
+          <div class="card-ttl">Laboratorio Dental<small>Nueva Imagen Lab</small></div>
+        </div>
+        <ul class="svc-list">
+          <li class="svc-item lab-item">Prótesis totales</li>
+          <li class="svc-item lab-item">Prótesis parciales removibles</li>
+          <li class="svc-item lab-item">Dientes de resina de alta estética</li>
+          <li class="svc-item lab-item">Placas de acrílico</li>
+          <li class="svc-item lab-item">Reparación de prótesis</li>
+          <li class="svc-item lab-item">Fabricación con ajuste preciso</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="galeria" class="gallery-section sec-pad">
+  <div class="gallery-head">
+    <div>
+      <div class="label label-white ani" data-anim="fadeInDown" data-delay="0">Nuestro trabajo</div>
+      <h2 class="section-title section-title-white ani" data-anim="fadeInDown" data-delay="120">Resultados que hablan por sí solos</h2>
+    </div>
+    <div class="gallery-head-right ani" data-anim="fadeInUp" data-delay="200">
+      <p>Cada pieza que fabricamos en nuestro laboratorio refleja años de experiencia y el compromiso con la calidad. Desde prótesis totales hasta coronas de precisión — todo hecho con cuidado.</p>
+      <a href="https://wa.me/527711887746?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="btn btn-white" style="display:inline-flex;">Agendar consulta</a>
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gal-item ani" data-anim="zoomIn" data-delay="0">
+      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20123650.png" alt="Prótesis totales" loading="lazy">
+      <div class="gal-overlay"><span class="gal-cap">Prótesis totales</span></div>
+    </div>
+    <div class="gal-item ani" data-anim="zoomIn" data-delay="120">
+      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20123831.png" alt="Selección de tono" loading="lazy" style="object-position:center top;">
+      <div class="gal-overlay"><span class="gal-cap">Selección de tono</span></div>
+    </div>
+    <div class="gal-item ani" data-anim="zoomIn" data-delay="240">
+      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20123846.png" alt="Coronas metálicas" loading="lazy" style="object-position:center 30%;">
+      <div class="gal-overlay"><span class="gal-cap">Coronas metálicas</span></div>
+    </div>
+    <div class="gal-item ani" data-anim="zoomIn" data-delay="360">
+      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20124157.png" alt="Trabajo de laboratorio" loading="lazy">
+      <div class="gal-overlay"><span class="gal-cap">Trabajo de laboratorio</span></div>
+    </div>
+    <div class="gal-item ani" data-anim="zoomIn" data-delay="480">
+      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20124115.png" alt="Anestesia local" loading="lazy" style="object-position:center 40%;">
+      <div class="gal-overlay"><span class="gal-cap">Anestesia local</span></div>
+    </div>
+    <a href="https://wa.me/527711887746?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="gal-cta ani" data-anim="zoomIn" data-delay="600">
+      <div class="gal-cta-title">¿Listo para tu nueva sonrisa?</div>
+      <div class="gal-cta-btn">Agendar cita</div>
+    </a>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="why-section sec-pad">
+  <div class="sec-head">
+    <div class="label ani" data-anim="fadeInDown" data-delay="0">Por qué elegirnos</div>
+    <h2 class="section-title ani" data-anim="fadeInDown" data-delay="120">La diferencia está en los detalles</h2>
+  </div>
+  <div class="sec-inner">
+    <div class="why-grid">
+      <div class="why-card ani" data-anim="fadeInUp" data-delay="0">
+        <div class="why-ico">🏭</div>
+        <div class="why-ttl">Laboratorio propio</div>
+        <div class="why-body">Fabricamos tus prótesis internamente. Tiempos más cortos, costos accesibles y control total de calidad sin intermediarios.</div>
+      </div>
+      <div class="why-card ani" data-anim="fadeInUp" data-delay="200">
+        <div class="why-ico">🤝</div>
+        <div class="why-ttl">Atención personalizada</div>
+        <div class="why-body">Te acompañamos desde la primera consulta hasta la entrega final, sin sorpresas y con seguimiento puntual.</div>
+      </div>
+      <div class="why-card ani" data-anim="fadeInUp" data-delay="400">
+        <div class="why-ico">✨</div>
+        <div class="why-ttl">Estética y función</div>
+        <div class="why-body">Materiales de resina de alta calidad para que tus prótesis luzcan naturales, sean cómodas y duren muchos años.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mapa -->
+<section class="map-section sec-pad">
+  <div class="map-inner">
+    <div>
+      <div class="label label-white ani" data-anim="fadeInDown" data-delay="0">Dónde encontrarnos</div>
+      <h2 class="section-title section-title-white ani" data-anim="fadeInDown" data-delay="120">Visítanos en Pachuca</h2>
+      <p class="map-address ani" data-anim="fadeInUp" data-delay="240">
+        <strong>Calle Sta. Esperanza 221</strong><br>
+        Col. La Providencia, Cadena<br>
+        Pachuca, Hidalgo, C.P. 42186
+      </p>
+      <a href="https://maps.app.goo.gl/9rPVMEjnFmNK1kH3A" target="_blank" rel="noopener" class="btn btn-white ani" data-anim="fadeInUp" data-delay="360" style="display:inline-flex;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Cómo llegar
+      </a>
+    </div>
+    <div class="map-frame ani" data-anim="fadeInRight" data-delay="100">
+      <iframe src="https://maps.google.com/maps?q=20.0581001,-98.7161073&z=17&output=embed&hl=es"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación Dental Nueva Imagen"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contacto" class="contact-section sec-pad">
+  <div class="contact-grid">
+    <div>
+      <div class="label label-white ani" data-anim="fadeInDown" data-delay="0">Contáctanos</div>
+      <h2 class="contact-title ani" data-anim="fadeInDown" data-delay="120">¿Listo para tu nueva <em>imagen</em>?</h2>
+      <p class="contact-sub ani" data-anim="fadeInUp" data-delay="240">Agenda tu cita hoy — en persona o por WhatsApp, estamos para ayudarte.</p>
+      <div class="social-row ani" data-anim="fadeInUp" data-delay="360">
+        <a href="https://www.instagram.com/laboratoriodentalnuevaimagen" target="_blank" rel="noopener" class="soc-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/share/1BpzGzPe8n" target="_blank" rel="noopener" class="soc-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook Consultorio
+        </a>
+        <a href="https://www.facebook.com/share/19VephKHQG" target="_blank" rel="noopener" class="soc-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook Lab
+        </a>
+      </div>
+    </div>
+    <div class="contact-cards">
+      <a href="https://wa.me/527711887746?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="c-card ani" data-anim="fadeInRight" data-delay="0">
+        <div class="c-ico">💬</div><div><div class="c-lbl">WhatsApp</div><div class="c-val">771 188 7746</div></div>
+      </a>
+      <a href="tel:+527711887746" class="c-card ani" data-anim="fadeInRight" data-delay="120">
+        <div class="c-ico">📞</div><div><div class="c-lbl">Teléfono</div><div class="c-val">771 188 7746</div></div>
+      </a>
+      <div class="c-card ani" data-anim="fadeInRight" data-delay="240">
+        <div class="c-ico">📍</div><div><div class="c-lbl">Dirección</div><div class="c-val">Calle Sta. Esperanza 221, Pachuca, Hgo.</div></div>
+      </div>
+      <div class="c-card ani" data-anim="fadeInRight" data-delay="360">
+        <div class="c-ico">🕐</div><div><div class="c-lbl">Horario</div><div class="c-val">Lunes a Sábado · Consultar disponibilidad</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div style="background:#fff;border-radius:4px;padding:4px 8px;line-height:0;opacity:.5;">
+    <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20124131.png" alt="Dental Nueva Imagen" style="height:28px;">
+  </div>
+  <div class="footer-cr">771 188 7746 · © 2026 Dental Nueva Imagen</div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive:true });
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    setTimeout(() => {
+      el.style.animationName = el.dataset.anim || 'fadeInUp';
+      el.classList.add('go');
+    }, parseInt(el.dataset.delay || 0));
+    observer.unobserve(el);
+  });
+}, { threshold:.1, rootMargin:'0px 0px -40px 0px' });
+
+document.querySelectorAll('.ani').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
