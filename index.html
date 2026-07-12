@@ -335,10 +335,27 @@ nav.scrolled { padding:.45rem 2.5rem; }
 }
 .about-body { color:var(--text2); line-height:1.85; }
 .about-body p+p { margin-top:1rem; }
+.about-doctor {
+  display:flex; align-items:center; gap:1rem;
+  margin-top:1.5rem; padding:1rem 1.2rem;
+  background:#fff; border-radius:12px;
+  border:1px solid var(--border);
+  box-shadow:0 4px 16px rgba(26,80,208,.07);
+}
+.about-doctor-avatar {
+  width:48px; height:48px; border-radius:50%;
+  background:var(--blue-bg); display:flex;
+  align-items:center; justify-content:center; flex-shrink:0;
+}
+.about-doctor-name {
+  font-family:'Outfit',sans-serif; font-weight:800;
+  font-size:1rem; color:var(--text);
+}
+.about-doctor-role { font-size:.75rem; color:var(--text2); margin-top:.2rem; }
 
 /* ══ SERVICES ══ */
 .services-section { background:var(--white); }
-.services-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+.services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
 .svc-card {
   background:var(--white); border:1.5px solid var(--border);
   border-radius:12px; padding:2.5rem;
@@ -366,6 +383,11 @@ nav.scrolled { padding:.45rem 2.5rem; }
 .svc-item:last-child { border-bottom:none; }
 .svc-item:hover { color:var(--blue); padding-left:4px; }
 .svc-item::before { content:'→'; color:var(--blue); flex-shrink:0; font-size:.78rem; margin-top:.2em; font-weight:700; }
+.svc-promo {
+  margin-top:1rem; padding:.6rem .9rem;
+  background:var(--blue-bg); border-radius:8px;
+  font-size:.75rem; font-weight:600; color:var(--blue);
+}
 .lab-item { font-family:'Courier New',monospace; font-size:.85rem; }
 .lab-item::before { content:'>'; }
 
@@ -435,6 +457,33 @@ nav.scrolled { padding:.45rem 2.5rem; }
 .map-frame iframe { display:block; width:100%; height:380px; border:none; }
 
 /* ══ CONTACT ══ */
+/* ── Doctor section ── */
+.doctor-section { background:var(--blue-bg); }
+.doctor-card {
+  display:grid; grid-template-columns:220px 1fr;
+  gap:3rem; align-items:center;
+  background:#fff; border-radius:24px;
+  padding:2.5rem 3rem;
+  box-shadow:0 8px 40px rgba(26,80,208,.1);
+  border:1px solid var(--border);
+}
+.doctor-avatar {
+  width:140px; height:140px; border-radius:50%;
+  background:var(--blue-bg);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto;
+  box-shadow:0 0 0 8px var(--blue-mid);
+}
+.doctor-avatar svg { width:100%; height:100%; }
+.doctor-name {
+  font-family:'Outfit',sans-serif; font-weight:900;
+  font-size:1.9rem; color:var(--text); line-height:1.1;
+  margin:.4rem 0 .3rem;
+}
+.doctor-role { font-size:.82rem; color:var(--blue); font-weight:600; letter-spacing:.04em; margin-bottom:1rem; }
+.doctor-bio { color:var(--text2); line-height:1.75; font-size:.95rem; margin-bottom:1.5rem; }
+.doctor-btns { display:flex; gap:.75rem; flex-wrap:wrap; }
+
 .contact-section { background:var(--blue-dk); }
 .contact-grid {
   max-width:1100px; margin:0 auto; padding:6rem 2.5rem;
@@ -496,10 +545,12 @@ footer {
   /* Resto de secciones */
   .stats-inner { grid-template-columns:repeat(2,1fr); }
   .about-grid { grid-template-columns:1fr; gap:3rem; padding:4rem 1.5rem; }
-  .services-grid { grid-template-columns:1fr; }
+  .services-grid { grid-template-columns:1fr 1fr; }
   .gallery-grid { grid-template-columns:repeat(2,1fr); }
   .why-grid { grid-template-columns:1fr 1fr; }
   .map-inner { grid-template-columns:1fr; gap:2.5rem; padding:4rem 1.5rem; }
+  .doctor-card { grid-template-columns:1fr; gap:1.5rem; text-align:center; padding:2rem; }
+  .doctor-btns { justify-content:center; }
   .contact-grid { grid-template-columns:1fr; gap:3rem; padding:4rem 1.5rem; }
   .sec-inner,.sec-head { padding:0 1.5rem; }
   .sec-head { padding-bottom:2.5rem; }
@@ -537,8 +588,11 @@ footer {
   .about-img { border-radius:16px; }
 
   /* Servicios */
-  .services-grid { gap:1rem; padding:0 1.25rem; }
-  .service-card { padding:1.5rem; }
+  .services-grid { grid-template-columns:1fr; gap:1rem; padding:0 1.25rem; }
+  .svc-card { padding:1.5rem; }
+  .doctor-card { grid-template-columns:1fr; gap:1.5rem; text-align:center; padding:1.5rem 1.25rem; }
+  .doctor-btns { justify-content:center; flex-direction:column; }
+  .doctor-btns .btn { width:100%; justify-content:center; }
 
   /* Galería */
   /* Galería */
@@ -727,8 +781,39 @@ footer {
       <h2 class="section-title ani" data-anim="fadeInDown" data-delay="100">Un consultorio y un laboratorio bajo el mismo techo</h2>
       <blockquote class="about-quote ani" data-anim="fadeInUp" data-delay="200">"Diseñamos y colocamos prótesis con mejor ajuste, estética y atención personalizada."</blockquote>
       <div class="about-body ani" data-anim="fadeInUp" data-delay="320">
-        <p>En <strong>Dental Nueva Imagen</strong> combinamos la calidez del consultorio con la precisión técnica de nuestro laboratorio propio. Controlamos cada detalle: desde el diagnóstico hasta la fabricación y colocación de tus prótesis.</p>
+        <p>En <strong>Consultorio &amp; Laboratorio Dental Nueva Imagen</strong> combinamos la calidez del consultorio con la precisión técnica de nuestro laboratorio propio. Controlamos cada detalle: desde el diagnóstico hasta la fabricación y colocación de tus prótesis.</p>
         <p>Tu salud es nuestra prioridad. Materiales de alta calidad, resultados duraderos y una sonrisa que te dé confianza.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Doctor -->
+<section class="doctor-section sec-pad">
+  <div class="sec-inner">
+    <div class="doctor-card ani" data-anim="fadeInUp" data-delay="0">
+      <div class="doctor-avatar">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="40" fill="var(--blue)"/>
+          <circle cx="40" cy="32" r="14" fill="white" opacity=".95"/>
+          <path d="M12 74c0-15.464 12.536-24 28-24s28 8.536 28 24" fill="white" opacity=".95"/>
+        </svg>
+      </div>
+      <div class="doctor-info">
+        <div class="label">Tu especialista</div>
+        <h2 class="doctor-name">Dr. Jesús Gabriel<br>Casillas Santos</h2>
+        <p class="doctor-role">Cirujano Dentista · Técnico Protesista Dental</p>
+        <p class="doctor-bio">Especialista en prótesis dental con laboratorio propio. Combina el conocimiento clínico con la técnica de laboratorio para ofrecerte resultados precisos, estéticos y duraderos — todo en un solo lugar.</p>
+        <div class="doctor-btns">
+          <a href="https://wa.me/527711887746?text=Hola%20Dr.%20Casillas%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            771 188 7746
+          </a>
+          <a href="https://wa.me/527717627599?text=Hola%20Dr.%20Casillas%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="btn btn-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            771 762 7599
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -742,34 +827,93 @@ footer {
   </div>
   <div class="sec-inner">
     <div class="services-grid">
+
       <div class="svc-card ani" data-anim="fadeInUp" data-delay="0">
         <div class="card-head">
-          <div class="card-ico">🦷</div>
-          <div class="card-ttl">Consultorio Dental<small>Atención clínica</small></div>
+          <div class="card-ico">👑</div>
+          <div class="card-ttl">Prótesis Fija<small>Estética, función y durabilidad</small></div>
         </div>
         <ul class="svc-list">
-          <li class="svc-item">Consulta y diagnóstico dental</li>
-          <li class="svc-item">Limpieza y profilaxis</li>
-          <li class="svc-item">Extracciones dentales</li>
-          <li class="svc-item">Colocación de prótesis</li>
-          <li class="svc-item">Revisión y ajuste de restauraciones</li>
-          <li class="svc-item">Atención personalizada</li>
+          <li class="svc-item">Coronas de zirconia</li>
+          <li class="svc-item">Disilicato de litio (máxima estética)</li>
+          <li class="svc-item">Metal-porcelana</li>
+          <li class="svc-item">Carillas inyectadas, estratificadas y fresadas</li>
+          <li class="svc-item">Puentes dentales</li>
         </ul>
+        <div class="svc-promo">🎁 Pregunta por promoción en 2 coronas de zirconia</div>
       </div>
+
+      <div class="svc-card ani" data-anim="fadeInUp" data-delay="100">
+        <div class="card-head">
+          <div class="card-ico">🦷</div>
+          <div class="card-ttl">Prótesis Removibles<small>Estética, función y comodidad</small></div>
+        </div>
+        <ul class="svc-list">
+          <li class="svc-item">Placas totales de acrílico</li>
+          <li class="svc-item">Placas totales de alto impacto</li>
+          <li class="svc-item">Placas parciales de acrílico</li>
+          <li class="svc-item">Removibles metálicos</li>
+          <li class="svc-item">Prótesis híbridas</li>
+        </ul>
+        <div class="svc-promo">🎁 Pregunta por promoción en tratamiento protésico</div>
+      </div>
+
       <div class="svc-card ani" data-anim="fadeInUp" data-delay="200">
         <div class="card-head">
           <div class="card-ico">⚙️</div>
-          <div class="card-ttl">Laboratorio Dental<small>Nueva Imagen Lab</small></div>
+          <div class="card-ttl">Laboratorio Dental<small>Para consultorios y doctores</small></div>
         </div>
         <ul class="svc-list">
-          <li class="svc-item lab-item">Prótesis totales</li>
-          <li class="svc-item lab-item">Prótesis parciales removibles</li>
-          <li class="svc-item lab-item">Dientes de resina de alta estética</li>
-          <li class="svc-item lab-item">Placas de acrílico</li>
-          <li class="svc-item lab-item">Reparación de prótesis</li>
-          <li class="svc-item lab-item">Fabricación con ajuste preciso</li>
+          <li class="svc-item">Prótesis totales y parciales</li>
+          <li class="svc-item">Coronas y puentes</li>
+          <li class="svc-item">Zirconia, metal-porcelana y disilicato</li>
+          <li class="svc-item">Incrustaciones y carillas</li>
+          <li class="svc-item">Ajustes y reparaciones</li>
         </ul>
       </div>
+
+      <div class="svc-card ani" data-anim="fadeInUp" data-delay="300">
+        <div class="card-head">
+          <div class="card-ico">🥊</div>
+          <div class="card-ttl">Protectores Bucales<small>Alto y mediano impacto</small></div>
+        </div>
+        <ul class="svc-list">
+          <li class="svc-item">Alto impacto — boxeo, artes marciales, WBC</li>
+          <li class="svc-item">Mediano impacto — fútbol, rugby, hockey</li>
+          <li class="svc-item">Hechos a la medida</li>
+          <li class="svc-item">Personalizados con tu nombre</li>
+          <li class="svc-item">Gran variedad de colores</li>
+        </ul>
+      </div>
+
+      <div class="svc-card ani" data-anim="fadeInUp" data-delay="400">
+        <div class="card-head">
+          <div class="card-ico">✨</div>
+          <div class="card-ttl">Aclaramiento Dental<small>Opciones seguras para tu sonrisa</small></div>
+        </div>
+        <ul class="svc-list">
+          <li class="svc-item">Aclaramiento nocturno (guardas en casa)</li>
+          <li class="svc-item">Aclaramiento en consultorio</li>
+          <li class="svc-item">Guardas para hipersensibilidad</li>
+          <li class="svc-item">Valoración previa incluida</li>
+        </ul>
+      </div>
+
+      <div class="svc-card ani" data-anim="fadeInUp" data-delay="500">
+        <div class="card-head">
+          <div class="card-ico">🪥</div>
+          <div class="card-ttl">Limpieza Dental Integral<small>Cuida tu sonrisa</small></div>
+        </div>
+        <ul class="svc-list">
+          <li class="svc-item">Limpieza con ultrasonido</li>
+          <li class="svc-item">Profilaxis dental</li>
+          <li class="svc-item">Remineralización con flúor y calcio</li>
+          <li class="svc-item">Mantenimiento de resinas incluido</li>
+          <li class="svc-item">Plan de seguimiento a 6 meses</li>
+        </ul>
+        <div class="svc-promo">🎁 Pregunta por promoción de mantenimiento</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -889,9 +1033,12 @@ footer {
     </div>
     <div class="contact-cards">
       <a href="https://wa.me/527711887746?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="c-card ani" data-anim="fadeInRight" data-delay="0">
-        <div class="c-ico">💬</div><div><div class="c-lbl">WhatsApp</div><div class="c-val">771 188 7746</div></div>
+        <div class="c-ico">💬</div><div><div class="c-lbl">WhatsApp Consultorio</div><div class="c-val">771 188 7746</div></div>
       </a>
-      <a href="tel:+527711887746" class="c-card ani" data-anim="fadeInRight" data-delay="120">
+      <a href="https://wa.me/527717627599?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="c-card ani" data-anim="fadeInRight" data-delay="80">
+        <div class="c-ico">💬</div><div><div class="c-lbl">WhatsApp Dr. Casillas</div><div class="c-val">771 762 7599</div></div>
+      </a>
+      <a href="tel:+527711887746" class="c-card ani" data-anim="fadeInRight" data-delay="160">
         <div class="c-ico">📞</div><div><div class="c-lbl">Teléfono</div><div class="c-val">771 188 7746</div></div>
       </a>
       <div class="c-card ani" data-anim="fadeInRight" data-delay="240">
