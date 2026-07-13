@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Consultorio & Laboratorio Dental Nueva Imagen | Pachuca</title>
+<title>Consultorio Dental Nueva Imagen | Pachuca, Hidalgo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -383,11 +383,35 @@ nav.scrolled { padding:.45rem 2.5rem; }
 .svc-item:last-child { border-bottom:none; }
 .svc-item:hover { color:var(--blue); padding-left:4px; }
 .svc-item::before { content:'→'; color:var(--blue); flex-shrink:0; font-size:.78rem; margin-top:.2em; font-weight:700; }
+.svc-card-lab { background:var(--blue-bg); border:1.5px dashed var(--border); }
+.svc-lab-text { font-size:.88rem; color:var(--text2); line-height:1.7; margin-top:.5rem; }
 .svc-promo {
   margin-top:1rem; padding:.6rem .9rem;
   background:var(--blue-bg); border-radius:8px;
   font-size:.75rem; font-weight:600; color:var(--blue);
 }
+
+/* ── Tecnología ── */
+.tech-section { background:var(--blue-bg); }
+.sec-sub { color:var(--text2); max-width:600px; margin:.75rem auto 0; text-align:center; line-height:1.7; font-size:.97rem; }
+.tech-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+}
+.tech-card {
+  background:#fff; border-radius:16px; overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 4px 20px rgba(26,80,208,.07);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.tech-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(26,80,208,.13); }
+.tech-img-wrap { width:100%; aspect-ratio:1/1; overflow:hidden; }
+.tech-img-wrap img { width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .5s ease; }
+.tech-card:hover .tech-img-wrap img { transform:scale(1.05); }
+.tech-info { padding:1.1rem 1.2rem 1.3rem; }
+.tech-ico { font-size:1.3rem; margin-bottom:.4rem; }
+.tech-ttl { font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem; color:var(--text); margin-bottom:.4rem; }
+.tech-body { font-size:.82rem; color:var(--text2); line-height:1.55; }
 .lab-item { font-family:'Courier New',monospace; font-size:.85rem; }
 .lab-item::before { content:'>'; }
 
@@ -546,6 +570,7 @@ footer {
   .stats-inner { grid-template-columns:repeat(2,1fr); }
   .about-grid { grid-template-columns:1fr; gap:3rem; padding:4rem 1.5rem; }
   .services-grid { grid-template-columns:1fr 1fr; }
+  .tech-grid { grid-template-columns:1fr 1fr; }
   .gallery-grid { grid-template-columns:repeat(2,1fr); }
   .why-grid { grid-template-columns:1fr 1fr; }
   .map-inner { grid-template-columns:1fr; gap:2.5rem; padding:4rem 1.5rem; }
@@ -590,6 +615,8 @@ footer {
   /* Servicios */
   .services-grid { grid-template-columns:1fr; gap:1rem; padding:0 1.25rem; }
   .svc-card { padding:1.5rem; }
+  .tech-grid { grid-template-columns:1fr; gap:1rem; padding:0 1.25rem; }
+  .sec-sub { text-align:left; }
   .doctor-card { grid-template-columns:1fr; gap:1.5rem; text-align:center; padding:1.5rem 1.25rem; }
   .doctor-btns { justify-content:center; flex-direction:column; }
   .doctor-btns .btn { width:100%; justify-content:center; }
@@ -648,7 +675,7 @@ footer {
     <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20124131.png" alt="Dental Nueva Imagen">
     <div class="nav-brand">
       <span class="nav-brand-name">Nueva Imagen</span>
-      <span class="nav-brand-sub">Consultorio &amp; Laboratorio Dental</span>
+      <span class="nav-brand-sub">Consultorio Dental · Pachuca, Hgo.</span>
     </div>
   </a>
   <ul class="nav-links">
@@ -669,10 +696,10 @@ footer {
 
     <!-- Texto izquierda -->
     <div class="hero-content">
-      <div class="hero-eyebrow">Pachuca, Hidalgo · Consultorio &amp; Laboratorio</div>
+      <div class="hero-eyebrow">Pachuca, Hidalgo · Consultorio Dental</div>
       <h1 class="hero-title">Vuelve a<br>sonreír con<br><em>nueva imagen</em></h1>
       <div class="hero-line"></div>
-      <p class="hero-sub">Precisión desde el laboratorio,<br>confianza en el consultorio.</p>
+      <p class="hero-sub">Diagnóstico preciso, tratamientos de calidad<br>y atención personalizada en Pachuca.</p>
       <div class="hero-btns">
         <a href="https://wa.me/527711887746?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="btn btn-white">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -696,9 +723,9 @@ footer {
             </svg>
           </div>
           <div class="hcard-text">
-            <div class="hcard-label">Laboratorio &amp; Consultorio</div>
-            <div class="hcard-title">Todo en un solo lugar</div>
-            <div class="hcard-desc">Fabricamos y colocamos tus prótesis sin intermediarios</div>
+            <div class="hcard-label">Consultorio Nueva Imagen</div>
+            <div class="hcard-title">Tecnología y precisión</div>
+            <div class="hcard-desc">Diagnóstico con cámara intraoral, radiografías digitales y tomografías</div>
           </div>
         </div>
 
@@ -753,10 +780,10 @@ footer {
 <div class="stats-strip">
   <div class="stats-inner">
     <div class="stat-item ani" data-anim="fadeInUp" data-delay="0">
-      <div class="stat-num">2 en 1</div><div class="stat-lbl">Consultorio + Lab</div>
+      <div class="stat-num">+500</div><div class="stat-lbl">Pacientes satisfechos</div>
     </div>
     <div class="stat-item ani" data-anim="fadeInUp" data-delay="150">
-      <div class="stat-num">Lab</div><div class="stat-lbl">Propio & equipado</div>
+      <div class="stat-num">10+</div><div class="stat-lbl">Años de experiencia</div>
     </div>
     <div class="stat-item ani" data-anim="fadeInUp" data-delay="300">
       <div class="stat-num">$$</div><div class="stat-lbl">Precio accesible</div>
@@ -773,23 +800,23 @@ footer {
     <div class="ani" data-anim="fadeInLeft" data-delay="0">
       <div class="about-img-wrap">
         <img class="about-img" src="imagenes/Captura%20de%20pantalla%202026-07-12%20123831.png" alt="Laboratorio dental">
-        <div class="about-badge"><strong>2 en 1</strong>Consultorio<br>+ Laboratorio</div>
+        <div class="about-badge"><strong>10+</strong>Años de<br>experiencia</div>
       </div>
     </div>
     <div>
       <div class="label ani" data-anim="fadeInDown" data-delay="0">Quiénes somos</div>
-      <h2 class="section-title ani" data-anim="fadeInDown" data-delay="100">Un consultorio y un laboratorio bajo el mismo techo</h2>
-      <blockquote class="about-quote ani" data-anim="fadeInUp" data-delay="200">"Diseñamos y colocamos prótesis con mejor ajuste, estética y atención personalizada."</blockquote>
+      <h2 class="section-title ani" data-anim="fadeInDown" data-delay="100">Tu salud dental en manos expertas</h2>
+      <blockquote class="about-quote ani" data-anim="fadeInUp" data-delay="200">"Diagnóstico preciso, tratamientos de calidad y una sonrisa que te devuelva la confianza."</blockquote>
       <div class="about-body ani" data-anim="fadeInUp" data-delay="320">
-        <p>En <strong>Consultorio &amp; Laboratorio Dental Nueva Imagen</strong> combinamos la calidez del consultorio con la precisión técnica de nuestro laboratorio propio. Controlamos cada detalle: desde el diagnóstico hasta la fabricación y colocación de tus prótesis.</p>
-        <p>Tu salud es nuestra prioridad. Materiales de alta calidad, resultados duraderos y una sonrisa que te dé confianza.</p>
+        <p>En <strong>Consultorio Dental Nueva Imagen</strong> combinamos tecnología de diagnóstico avanzada con atención personalizada para darte el tratamiento más adecuado a tu caso.</p>
+        <p>Tu salud es nuestra prioridad. Materiales de alta calidad, resultados duraderos y seguimiento puntual en cada etapa de tu tratamiento.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Doctor -->
-<section class="doctor-section sec-pad">
+<section class="doctor-section sec-pad" style="display:none">
   <div class="sec-inner">
     <div class="doctor-card ani" data-anim="fadeInUp" data-delay="0">
       <div class="doctor-avatar">
@@ -823,7 +850,7 @@ footer {
 <section id="servicios" class="services-section sec-pad">
   <div class="sec-head">
     <div class="label ani" data-anim="fadeInDown" data-delay="0">Nuestros servicios</div>
-    <h2 class="section-title ani" data-anim="fadeInDown" data-delay="120">Atención integral: clínica y laboratorio</h2>
+    <h2 class="section-title ani" data-anim="fadeInDown" data-delay="120">Tratamientos para tu salud y tu sonrisa</h2>
   </div>
   <div class="sec-inner">
     <div class="services-grid">
@@ -831,89 +858,155 @@ footer {
       <div class="svc-card ani" data-anim="fadeInUp" data-delay="0">
         <div class="card-head">
           <div class="card-ico">👑</div>
-          <div class="card-ttl">Prótesis Fija<small>Estética, función y durabilidad</small></div>
+          <div class="card-ttl">Prótesis Dentales<small>Fijas y removibles</small></div>
         </div>
         <ul class="svc-list">
-          <li class="svc-item">Coronas de zirconia</li>
-          <li class="svc-item">Disilicato de litio (máxima estética)</li>
-          <li class="svc-item">Metal-porcelana</li>
-          <li class="svc-item">Carillas inyectadas, estratificadas y fresadas</li>
+          <li class="svc-item">Coronas de zirconia, disilicato y metal-porcelana</li>
+          <li class="svc-item">Carillas dentales</li>
           <li class="svc-item">Puentes dentales</li>
+          <li class="svc-item">Placas totales y parciales</li>
+          <li class="svc-item">Prótesis híbridas y metálicas</li>
         </ul>
-        <div class="svc-promo">🎁 Pregunta por promoción en 2 coronas de zirconia</div>
+        <div class="svc-promo">🎁 Pregunta por promoción en coronas de zirconia</div>
       </div>
 
       <div class="svc-card ani" data-anim="fadeInUp" data-delay="100">
         <div class="card-head">
-          <div class="card-ico">🦷</div>
-          <div class="card-ttl">Prótesis Removibles<small>Estética, función y comodidad</small></div>
+          <div class="card-ico">😁</div>
+          <div class="card-ttl">Diseño de Sonrisa<small>Con tecnología digital</small></div>
         </div>
         <ul class="svc-list">
-          <li class="svc-item">Placas totales de acrílico</li>
-          <li class="svc-item">Placas totales de alto impacto</li>
-          <li class="svc-item">Placas parciales de acrílico</li>
-          <li class="svc-item">Removibles metálicos</li>
-          <li class="svc-item">Prótesis híbridas</li>
+          <li class="svc-item">Diseño digital previo al tratamiento</li>
+          <li class="svc-item">Carillas de porcelana y resina</li>
+          <li class="svc-item">Aclaramiento dental nocturno y en consultorio</li>
+          <li class="svc-item">Rehabilitación integral con tecnología</li>
         </ul>
-        <div class="svc-promo">🎁 Pregunta por promoción en tratamiento protésico</div>
       </div>
 
       <div class="svc-card ani" data-anim="fadeInUp" data-delay="200">
         <div class="card-head">
-          <div class="card-ico">⚙️</div>
-          <div class="card-ttl">Laboratorio Dental<small>Para consultorios y doctores</small></div>
+          <div class="card-ico">🪥</div>
+          <div class="card-ttl">Limpieza Dental<small>Una sonrisa perfecta a tu alcance</small></div>
         </div>
         <ul class="svc-list">
-          <li class="svc-item">Prótesis totales y parciales</li>
-          <li class="svc-item">Coronas y puentes</li>
-          <li class="svc-item">Zirconia, metal-porcelana y disilicato</li>
-          <li class="svc-item">Incrustaciones y carillas</li>
-          <li class="svc-item">Ajustes y reparaciones</li>
+          <li class="svc-item">Limpieza con ultrasonido</li>
+          <li class="svc-item">Instrumental mecánico (Odontoxesis)</li>
+          <li class="svc-item">Limpieza con aeropulidor</li>
+          <li class="svc-item">Profilaxis (pulido con pasta abrasiva)</li>
+          <li class="svc-item">Raspado y alisado</li>
         </ul>
+        <div class="svc-promo">🎁 Mantenimiento semestral $1,200 MXN</div>
       </div>
 
       <div class="svc-card ani" data-anim="fadeInUp" data-delay="300">
         <div class="card-head">
-          <div class="card-ico">🥊</div>
-          <div class="card-ttl">Protectores Bucales<small>Alto y mediano impacto</small></div>
+          <div class="card-ico">🛡️</div>
+          <div class="card-ttl">Odontología Preventiva<small>Tu salud es nuestra prioridad</small></div>
         </div>
         <ul class="svc-list">
-          <li class="svc-item">Alto impacto — boxeo, artes marciales, WBC</li>
-          <li class="svc-item">Mediano impacto — fútbol, rugby, hockey</li>
-          <li class="svc-item">Hechos a la medida</li>
-          <li class="svc-item">Personalizados con tu nombre</li>
-          <li class="svc-item">Gran variedad de colores</li>
+          <li class="svc-item">Sellados de fosetas y fisuras</li>
+          <li class="svc-item">Remineralización del esmalte</li>
+          <li class="svc-item">Ortopedia maxilar</li>
+          <li class="svc-item">Técnica de cepillado</li>
+          <li class="svc-item">Aplicación de flúor</li>
+          <li class="svc-item">Radiografías de rutina</li>
         </ul>
       </div>
 
       <div class="svc-card ani" data-anim="fadeInUp" data-delay="400">
         <div class="card-head">
-          <div class="card-ico">✨</div>
-          <div class="card-ttl">Aclaramiento Dental<small>Opciones seguras para tu sonrisa</small></div>
+          <div class="card-ico">🥊</div>
+          <div class="card-ttl">Protectores Bucales<small>Hechos a tu medida</small></div>
         </div>
         <ul class="svc-list">
-          <li class="svc-item">Aclaramiento nocturno (guardas en casa)</li>
-          <li class="svc-item">Aclaramiento en consultorio</li>
-          <li class="svc-item">Guardas para hipersensibilidad</li>
-          <li class="svc-item">Valoración previa incluida</li>
+          <li class="svc-item">Alto impacto — boxeo, artes marciales, WBC</li>
+          <li class="svc-item">Mediano impacto — fútbol, rugby, hockey</li>
+          <li class="svc-item">Personalizados con tu nombre</li>
+          <li class="svc-item">Gran variedad de colores</li>
         </ul>
       </div>
 
-      <div class="svc-card ani" data-anim="fadeInUp" data-delay="500">
+      <div class="svc-card svc-card-lab ani" data-anim="fadeInUp" data-delay="500">
         <div class="card-head">
-          <div class="card-ico">🪥</div>
-          <div class="card-ttl">Limpieza Dental Integral<small>Cuida tu sonrisa</small></div>
+          <div class="card-ico">⚙️</div>
+          <div class="card-ttl">+ Laboratorio Propio<small>Una ventaja para ti</small></div>
         </div>
-        <ul class="svc-list">
-          <li class="svc-item">Limpieza con ultrasonido</li>
-          <li class="svc-item">Profilaxis dental</li>
-          <li class="svc-item">Remineralización con flúor y calcio</li>
-          <li class="svc-item">Mantenimiento de resinas incluido</li>
-          <li class="svc-item">Plan de seguimiento a 6 meses</li>
-        </ul>
-        <div class="svc-promo">🎁 Pregunta por promoción de mantenimiento</div>
+        <p class="svc-lab-text">Contamos con laboratorio dental propio — lo que significa tiempos más cortos, costos accesibles y control total de calidad sin intermediarios. Todo en el mismo lugar.</p>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- Tecnología -->
+<section class="tech-section sec-pad">
+  <div class="sec-head">
+    <div class="label ani" data-anim="fadeInDown" data-delay="0">Diagnóstico con tecnología</div>
+    <h2 class="section-title ani" data-anim="fadeInDown" data-delay="120">Tu diagnóstico será más preciso con nuestra tecnología</h2>
+    <p class="sec-sub ani" data-anim="fadeInUp" data-delay="200">Cámara intraoral, radiografías digitales y tomografías — para que veas todo el procedimiento y recibas el tratamiento más adecuado.</p>
+  </div>
+  <div class="sec-inner">
+    <div class="tech-grid">
+      <div class="tech-card ani" data-anim="zoomIn" data-delay="0">
+        <div class="tech-img-wrap">
+          <img src="imagenes/937e7cd8-605b-479e-9090-308c21bbbeb8.jpg" alt="Cámara intraoral" loading="lazy">
+        </div>
+        <div class="tech-info">
+          <div class="tech-ico">📷</div>
+          <div class="tech-ttl">Cámara Intraoral</div>
+          <p class="tech-body">Ve en pantalla todo lo que pasa dentro de tu boca durante el tratamiento en tiempo real.</p>
+        </div>
+      </div>
+      <div class="tech-card ani" data-anim="zoomIn" data-delay="100">
+        <div class="tech-img-wrap">
+          <img src="imagenes/6ed5201f-c7a3-440e-a324-58ef2899f1bd.jpg" alt="Radiografía periapical digital" loading="lazy">
+        </div>
+        <div class="tech-info">
+          <div class="tech-ico">🔬</div>
+          <div class="tech-ttl">Radiografías Periapicales Digitales</div>
+          <p class="tech-body">Imágenes de alta resolución para diagnóstico preciso de raíces, hueso y tejidos sin demora.</p>
+        </div>
+      </div>
+      <div class="tech-card ani" data-anim="zoomIn" data-delay="200">
+        <div class="tech-img-wrap">
+          <img src="imagenes/8933231b-63d1-4adb-ba46-5b7de9b9d359.jpg" alt="Tomografía CBCT" loading="lazy">
+        </div>
+        <div class="tech-info">
+          <div class="tech-ico">🧠</div>
+          <div class="tech-ttl">Tomografías CBCT</div>
+          <p class="tech-body">Visión 3D completa de tu mandíbula y dentición para planificar tratamientos complejos con total seguridad.</p>
+        </div>
+      </div>
+      <div class="tech-card ani" data-anim="zoomIn" data-delay="300">
+        <div class="tech-img-wrap">
+          <img src="imagenes/9db8a7c0-03cd-45e1-ab21-46856bb6f72a.jpg" alt="Diseño de sonrisa digital" loading="lazy">
+        </div>
+        <div class="tech-info">
+          <div class="tech-ico">💻</div>
+          <div class="tech-ttl">Diseño de Sonrisa Digital</div>
+          <p class="tech-body">Ve cómo quedará tu sonrisa antes de iniciar cualquier tratamiento, con modelado digital en 3D.</p>
+        </div>
+      </div>
+      <div class="tech-card ani" data-anim="zoomIn" data-delay="400">
+        <div class="tech-img-wrap">
+          <img src="imagenes/677d40bb-49f5-4569-b1d7-9a05ffce6a2c.jpg" alt="Rehabilitación integral con tecnología" loading="lazy">
+        </div>
+        <div class="tech-info">
+          <div class="tech-ico">⚡</div>
+          <div class="tech-ttl">Rehabilitación Integral</div>
+          <p class="tech-body">Tratamientos completos con planificación digital para resultados estéticos y funcionales duraderos.</p>
+        </div>
+      </div>
+      <div class="tech-card ani" data-anim="zoomIn" data-delay="500">
+        <div class="tech-img-wrap">
+          <img src="imagenes/b5f36be8-01b1-440e-9c80-0a492da1bc08.jpg" alt="Consultorio equipado" loading="lazy" style="object-position:center top;">
+        </div>
+        <div class="tech-info">
+          <div class="tech-ico">🏥</div>
+          <div class="tech-ttl">Consultorio Equipado</div>
+          <p class="tech-body">Instalaciones modernas con toda la tecnología disponible para tu comodidad y seguridad.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -926,7 +1019,7 @@ footer {
       <h2 class="section-title section-title-white ani" data-anim="fadeInDown" data-delay="120">Resultados que hablan por sí solos</h2>
     </div>
     <div class="gallery-head-right ani" data-anim="fadeInUp" data-delay="200">
-      <p>Cada pieza que fabricamos en nuestro laboratorio refleja años de experiencia y el compromiso con la calidad. Desde prótesis totales hasta coronas de precisión — todo hecho con cuidado.</p>
+      <p>Cada caso es único. Combinamos experiencia clínica y tecnología de diagnóstico para darte el tratamiento más preciso y los mejores resultados.</p>
       <a href="https://wa.me/527711887746?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="btn btn-white" style="display:inline-flex;">Agendar consulta</a>
     </div>
   </div>
@@ -936,20 +1029,20 @@ footer {
       <div class="gal-overlay"><span class="gal-cap">Prótesis totales</span></div>
     </div>
     <div class="gal-item ani" data-anim="zoomIn" data-delay="120">
-      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20123831.png" alt="Selección de tono" loading="lazy" style="object-position:center top;">
-      <div class="gal-overlay"><span class="gal-cap">Selección de tono</span></div>
+      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20124157.png" alt="Trabajo de laboratorio" loading="lazy">
+      <div class="gal-overlay"><span class="gal-cap">Trabajo de laboratorio</span></div>
     </div>
     <div class="gal-item ani" data-anim="zoomIn" data-delay="240">
       <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20123846.png" alt="Coronas metálicas" loading="lazy" style="object-position:center 30%;">
       <div class="gal-overlay"><span class="gal-cap">Coronas metálicas</span></div>
     </div>
     <div class="gal-item ani" data-anim="zoomIn" data-delay="360">
-      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20124157.png" alt="Trabajo de laboratorio" loading="lazy">
-      <div class="gal-overlay"><span class="gal-cap">Trabajo de laboratorio</span></div>
+      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20123831.png" alt="Selección de tono" loading="lazy" style="object-position:center top;">
+      <div class="gal-overlay"><span class="gal-cap">Selección de tono</span></div>
     </div>
     <div class="gal-item ani" data-anim="zoomIn" data-delay="480">
-      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20124115.png" alt="Anestesia local" loading="lazy" style="object-position:center 40%;">
-      <div class="gal-overlay"><span class="gal-cap">Anestesia local</span></div>
+      <img src="imagenes/Captura%20de%20pantalla%202026-07-12%20124157.png" alt="Prótesis parcial" loading="lazy">
+      <div class="gal-overlay"><span class="gal-cap">Prótesis parcial</span></div>
     </div>
     <a href="https://wa.me/527711887746?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" target="_blank" rel="noopener" class="gal-cta ani" data-anim="zoomIn" data-delay="600">
       <div class="gal-cta-title">¿Listo para tu nueva sonrisa?</div>
@@ -968,8 +1061,8 @@ footer {
     <div class="why-grid">
       <div class="why-card ani" data-anim="fadeInUp" data-delay="0">
         <div class="why-ico">🏭</div>
-        <div class="why-ttl">Laboratorio propio</div>
-        <div class="why-body">Fabricamos tus prótesis internamente. Tiempos más cortos, costos accesibles y control total de calidad sin intermediarios.</div>
+        <div class="why-ttl">Tecnología de diagnóstico</div>
+        <div class="why-body">Cámara intraoral, radiografías digitales y tomografías para que recibas el tratamiento más preciso y adecuado a tu caso.</div>
       </div>
       <div class="why-card ani" data-anim="fadeInUp" data-delay="200">
         <div class="why-ico">🤝</div>
@@ -992,7 +1085,7 @@ footer {
       <div class="label label-white ani" data-anim="fadeInDown" data-delay="0">Dónde encontrarnos</div>
       <h2 class="section-title section-title-white ani" data-anim="fadeInDown" data-delay="120">Visítanos en Pachuca</h2>
       <p class="map-address ani" data-anim="fadeInUp" data-delay="240">
-        <strong>Calle Sta. Esperanza 221</strong><br>
+        <strong>Sta. Esperanza #214, La Providencia</strong><br>
         Col. La Providencia, Cadena<br>
         Pachuca, Hidalgo, C.P. 42186
       </p>
@@ -1042,7 +1135,7 @@ footer {
         <div class="c-ico">📞</div><div><div class="c-lbl">Teléfono</div><div class="c-val">771 188 7746</div></div>
       </a>
       <div class="c-card ani" data-anim="fadeInRight" data-delay="240">
-        <div class="c-ico">📍</div><div><div class="c-lbl">Dirección</div><div class="c-val">Calle Sta. Esperanza 221, Pachuca, Hgo.</div></div>
+        <div class="c-ico">📍</div><div><div class="c-lbl">Dirección</div><div class="c-val">Sta. Esperanza #214, La Providencia, Pachuca, Hgo.</div></div>
       </div>
       <div class="c-card ani" data-anim="fadeInRight" data-delay="360">
         <div class="c-ico">🕐</div><div><div class="c-lbl">Horario</div><div class="c-val">Lunes a Sábado · Consultar disponibilidad</div></div>
